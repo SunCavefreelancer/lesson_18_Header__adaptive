@@ -1,0 +1,310 @@
+/*=======Підключення шрифтів=======*/
+@import url("fonts.css");
+
+/*=======Скидання стилів=======*/
+@import url("reset.css");
+
+
+
+
+body {
+	font-family: 'Inter', sans-serif;
+	color: #6d6d6d;
+}
+.wrapper {
+	overflow: clip;
+	min-height: 100%;
+
+	display: flex;			/* прижимаем футер книзу */
+	flex-direction: column;/* прижимаем футер книзу */
+}
+.wrapper>main {
+	flex-grow: 1;			/* прижимаем футер книзу */
+}
+
+/* для усіх "__container" однаково */
+[class*="__container"] {
+	max-width: 1200px; /* 1170 + 15 + 15 */
+	margin: 0 auto;
+	padding: 0px 15px;
+}
+
+
+
+
+/* ---header---- */
+/* .header {} */
+
+.header__container {
+	display: flex;
+	padding: 0px 15px;	/* відступи безбеки меню від ЛОГО і іконками по боках */
+	align-items: center;/* ставимо усі елементи на одному рівні по висоті! */
+	min-height: 100px;
+	gap: 20px;			/* не дасть злипнутись ЛОГО, меню, іконкам */
+	padding-top: 5px;	/* щоб пункти меню не прилипали до верху і низу header */
+	padding-bottom: 5px;/* щоб пункти меню не прилипали до верху і низу header */
+}
+
+.header__logo {
+	color: #000;
+	font-family: 'Merriweather';
+	font-size: 30px;
+	font-style: italic;
+	font-weight: 700;
+	line-height: 1.26;
+	flex-shrink: 0;	/* щоб логотип не переносився на другий рядок при зменшенні екрану */
+
+	position: relative;		/* дістаємо наверх для адаптиву */
+	z-index: 5;				/* дістаємо наверх для адаптиву */
+}
+
+.menu {
+	flex: 1 1 auto; 	/* робимо меню на всю ширину між ЛОГО і іконками */
+}
+/* .menu__body {}  тут будемо робити бургер-меню*/
+
+/* ul */
+.menu__list {
+	display: flex;			/* ставимо меню ПО ЦЕНТРУ */
+	justify-content: center;/* ставимо меню ПО ЦЕНТРУ */	
+	column-gap: 36px;		/* відступи між пунктами меню */
+	row-gap: 8px;			/* при переносі пунктів меню відступи */
+	flex-wrap: wrap;
+}
+
+/* .menu__item {} */
+
+.menu__item--vip .menu__link { /* звертаємося одразу до 2х класів */
+	font-weight: 700;
+	text-decoration: underline;
+	color: #d58417;
+}
+
+/* пункти меню */
+.menu__link {
+	color: #000;
+	font-family: 'Merriweather';
+	font-size: 20px;
+	transition: color 0.3s;
+}
+.menu__link:hover {
+	text-decoration: underline;
+}
+
+
+
+/* модифікатор */ /* <!-- menu__item--parent модифікатор для стрілки вниз --> */
+.menu__item--parent {
+	position: relative;/* ---position для sub-menu--- */
+}
+
+.menu__item--parent .menu__link { 		/* звертаємось  одразу до 2 тегів*/
+	display: flex;			/* ставимо стрілку по центру пункта меню */
+	align-items: center;	/* ставимо стрілку по центру пункта меню */	
+	gap: 4px;
+}
+
+@media (any-hover: hover){	/* прибираємо -hover- на тачюскрінах */
+.menu__item--parent .menu__link::after { /* звертаємось  одразу до 2 тегів*/
+	content: '';
+	display: inline-block;
+	background-image: url(../img/arrow.png);
+	background-repeat: no-repeat;
+	background-position: center;
+	width: 16px;
+	height: 8px;
+	flex: 0 0 16px;
+
+	transition: transform 0.3s;		/* для руху стрілки */
+	}
+}
+
+
+
+/* ----------показуємо sub-menu---------------- */
+.menu__item--parent:hover .sub-menu {
+	opacity: 1;
+	transform: translate(0px, 0px);
+	visibility: visible;			/* -------показуємо sub-menu------- */
+
+		/* Чудова властивість */
+	pointer-events: all; /* це взаємодія на сам перед з ПУНКТОМ МЕНЮ */
+}
+
+/* ----------------sub-menu--------------- */
+.sub-menu {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	padding-top: 5px;	/* робимо не розривним меню і sub-menu! */
+
+	transform: translate(0px, 10%); /* з'являється знизу у верх */
+	opacity: 0;						/* плавність */
+	visibility: hidden;				/* -------сховали sub-menu------- */
+	transition: all 0.3s;
+
+	/* Чудова властивість */
+	pointer-events: none;		 /* це взаємодія на сам перед з ПУНКТОМ МЕНЮ */
+}
+.sub-menu__list {
+	width: 200px; 				 /* ширина фона sub-menu */
+	border-radius: 15px;
+	padding: 15px;
+	background-color: #ebb9b9;	/* color фона sub-menu */
+}
+
+/* .sub-menu__item {} */
+
+.sub-menu__item:not(:last-child) {
+	margin-bottom: 10px;
+}
+
+.sub-menu__link {
+	color: #fff;
+	font-size: 18px;
+	transition: all 0.3s;
+}
+
+@media (any-hover: hover){	/* прибираємо -hover- на тачюскрінах */
+.sub-menu__link:hover {
+	text-decoration: underline;
+	}
+}
+
+
+/* ----------крутимо стрілку---------------- */
+.menu__item--parent:hover .menu__link::after {
+	transform: rotate(-180deg);
+}
+
+
+
+
+/* -----------------icons--------------- */
+.header__actions {
+	flex-shrink: 0;/* щоб icons не переносилися на другий рядок при зменшенні екрану */
+}
+
+.actions__header {
+	display: flex;
+	align-items: center;
+	gap: 23px;
+
+	position: relative;		/* дістаємо наверх для адаптиву */
+	z-index: 5;				/* дістаємо наверх для адаптиву */
+}
+
+.actions__header__item {
+	flex: 0 0 32px;			/* фіксуємо розмір scons */	
+	position: relative;		/* для іконок - цифри */
+
+	transition: transform 0.3s;
+}
+
+
+@media (any-hover: hover){	/* прибираємо -hover- на тачюскрінах */
+.actions__header__item:hover {
+	transform: scale(1.1);
+	}
+}
+
+.actions__header__item img{
+	max-width: 100%;
+}
+.actions__header__item span {/* для іконок - цифри */
+	position: absolute;
+	top: 0;
+	right: 0;
+	border-radius: 50%;
+	width: 12px;
+	height: 12px;
+	background-color: #FF3333;
+	color: #fff;
+	font-size: 9px;
+	text-align: center;
+	line-height: 12px;
+	
+}
+
+
+
+/* ------------адаптив--------------- */
+@media (max-width:960px){
+	.header__container {	/* зменшуємо шапку */
+		min-height: 50px;
+	}
+
+	.menu__body {
+		position: fixed;
+		width: 100%;
+		height: 100%;
+		overflow: auto;		/* буде скролл у низ */
+		top: 0;
+		left: 0;
+		background-color: #f38989;
+		padding: 80px 15px 30px 15px;
+	}	
+	.menu__body::before {		/* така шапка під яку заходять меню при скролі */
+		content: '';
+		position: fixed;
+		width: 100%;
+		height: 50px; /* px вже значення як зменшили */
+		top: 0;
+		left: 0;
+		z-index: 2;
+		background-color: #FF3333;
+	}
+
+
+	/* ul ставимо меню в КОЛОНКУ і з ПРАВА */
+	.menu__list { 
+		flex-direction: column;
+		/* align-items: right;  - так буде ЗЛІВА*/
+		text-align: right;	/*   - так буде ЗПРАВА*/
+		row-gap: 28px; 		/* збільшуємо відступи між пунктами меню */
+	}
+	/* пункти меню */
+	.menu__link {
+		font-size: 28px; 	/* збільшуємо відступи самі пункти меню */
+	}
+
+	.menu__item--parent .menu__link {
+		display: block;		/* прибрали галочку від пункта */
+	}
+	.menu__item--parent .menu__link::after {
+		display: none;		/* прибрали галочку від пункта */
+	}
+
+	.sub-menu {
+		position: relative;
+		visibility: visible;
+		padding-top: 10px;
+		opacity: 1;
+		transform: translate(0px, 0px);
+	}
+	.sub-menu__list {
+		width: 100%;
+		border-radius: 0;
+	}
+
+	.sub-menu__item:not(:last-child) {
+		margin-bottom: 20px;
+	}
+
+	.sub-menu__link {
+		font-size: 24px;
+		color: #000;
+	}
+}
+@media (max-width:440px){
+	.header__logo {
+		font-size: 24px;	/* зменшуємо logo text */
+	}
+}
+
+
+/* -------main--------- */
+/* .main {} */
+
+/* -------footer--------- */
+/* .footer {} */
