@@ -190,7 +190,7 @@ body {
 	/* ширина фона sub-menu */
 	border-radius: 15px;
 	padding: 15px;
-	background-color: #ebb9b9;
+	background-color: #ebebb9;
 	/* color фона sub-menu */
 }
 
@@ -305,7 +305,7 @@ body {
 		top: 0;
 		left: -100%;
 		/* буде виїзджати ЗЛІВА */
-		transform: left 0.3s;
+		transition: left 0.3s;
 		/* буде виїзджати ЗЛІВА */
 
 		background-color: #f38989;
@@ -314,7 +314,7 @@ body {
 
 	.menu__body::before {
 		/* така шапка під яку заходять меню при скролі */
-		content: '';
+		content: "";
 		position: fixed;
 		width: 100%;
 		height: 50px;
@@ -322,13 +322,13 @@ body {
 		top: 0;
 		left: 100%;
 		/* буде виїзджати ЗЛІВА */
-		transform: left 0.3s;
+		transition: left 0.3s;
 		/* буде виїзджати ЗЛІВА */
 		z-index: 3;
 		background-color: #ff9233;
 	}
 
-	.menu__open .menu__body,
+	.menu-open .menu__body,
 	.menu-open .menu__body::before {
 		left: 0;
 	}
@@ -401,10 +401,8 @@ body {
 	}
 
 	/* малюємо бургер полоски*/
-	.icon-menu::before,
-	/* верхня полоска */
-	.icon-menu::after {
-		/* нижня полоска */
+	.icon-menu::before,/* верхня полоска */
+	.icon-menu::after {/* нижня полоска */
 		content: "";
 		height: 2px;
 		width: 30px;
@@ -433,10 +431,27 @@ body {
 		/* ставимо її по центру */
 		margin-top: -1px;
 		/* ставимо її по центру */
+		transition: all 0.3s;	/* буде зникати середня полоска ПЛАВНО*/
 	}
-}
 
+	/* ------------------тепер КРУТИМО БУРГЕР------------------- */
+	.menu-open .icon-menu span {	/* коли меню відкрите */
+		transform: scale(0);		/* буде зникати середня полоска */
+	}
+	.menu-open .icon-menu::before	/* верхня полоска */{
+		transform: rotate(-45deg);
+		top: 50%;
+		margin-top: -1px;
+	}
+	.menu-open .icon-menu::after	 /* нижня полоска */{
+		transform: rotate(45deg);
+		bottom: 50%;
+		margin-bottom: -1px;
+	}
+
+}
 /* --------------------закончили рисовать бургер---------------------------- */
+
 
 
 @media (max-width:440px) {
@@ -461,6 +476,163 @@ body {
 
 /* -------main--------- */
 /* .main {} */
+
+/* Hero */
+.hero {
+	background-color: #502203;
+	padding: 200px 0px 55px 0px;
+	flex-grow: 1;
+	display: flex;
+	align-items: center;
+}
+.hero__container {
+	flex: 1 1 auto;
+	display: flex;
+	align-items: flex-start;
+}
+
+.hero__body > * {
+	margin-bottom: 9px;
+}
+
+.hero__title {
+	font-family: "Cormorant Infant";
+	color: #fff;
+	font-weight: 700;
+	font-size: 78px;
+	line-height: 129%;
+}
+.hero__button {
+	color: #fff;
+	font-family: "Cormorant Infant";
+	font-size: 24px;
+	font-weight: 600;
+	padding: 15px 25px;
+	border: 1px solid #fff;
+	border-radius: 4px;
+	position: relative;
+}
+.hero__button::before {
+	border-radius: 4px;
+	content: "";
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 12px;
+	left: -8px;
+	transition: all 0.3s;
+	background-color: rgba(255, 255, 255, 0.06);
+}
+
+@media (any-hover: hover) {
+	.hero__button:hover::before {
+		top: 0;
+		left: 0;
+	}
+}
+
+.hero__body > *:last-child {
+	margin-bottom: 0;
+}
+
+.hero__image {
+	flex-basis: 36.75%; /* 430/1170 */
+	flex-shrink: 0;
+	border-radius: 215px;
+	border: 1px solid #fff;
+	padding: 20px;
+}
+.hero__image img {
+	width: 100%;
+	border-radius: 215px;
+}
+.hero__content {
+}
+@media (min-width: 992px) {
+	.hero__content {
+		flex-basis: 31.625%;
+		padding-top: 76px;
+		padding-left: 30px;
+		flex-shrink: 0;
+	}
+}
+
+.content-hero {
+	display: flex;
+	align-self: stretch;
+	flex-direction: column;
+	gap: 20px;
+}
+.content-hero__text {
+	color: #fff;
+	font-family: "Cormorant Infant";
+	font-size: 22px;
+	font-weight: 700;
+	line-height: 148%; /* 32.56px */
+	flex-grow: 1;
+}
+.content-hero__item {
+	color: #fff;
+	font-family: "Cormorant Infant";
+	font-size: 32px;
+	font-weight: 600;
+	line-height: 120%; /* 38.4px */
+	padding-left: 10px;
+	position: relative;
+}
+.content-hero__item::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 50%;
+	width: 1px;
+	background-color: #fff;
+	transform: translate(0px, -50%);
+	height: 78.947368%; /* 60/76 */
+}
+
+@media (max-width: 1200px) {
+	.hero__title {
+		font-size: 64px;
+	}
+}
+@media (max-width: 991.98px) {
+	.hero {
+		padding: 150px 0px 40px 0px;
+	}
+	.hero__container {
+		flex-direction: column;
+		gap: 40px;
+		align-items: stretch;
+	}
+	.hero__body {
+		text-align: center;
+	}
+	.hero__image {
+		align-self: center;
+	}
+}
+@media (max-width: 960px) {
+	.hero {
+		padding: 90px 0px 40px 0px;
+	}
+}
+
+@media (min-width: 992px) {
+	.hero__body {
+		flex-basis: 31.625%;
+		flex-shrink: 0;
+		padding-top: 57px;
+		padding-right: 30px;
+	}
+	.content-hero__item {
+		align-self: flex-end;
+	}
+	.content-hero__item {
+		margin-bottom: 183px;
+	}
+}
+
 
 /* -------footer--------- */
 /* .footer {} */
